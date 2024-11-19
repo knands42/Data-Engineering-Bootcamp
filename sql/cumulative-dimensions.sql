@@ -1,3 +1,4 @@
+-- Create the `players` table where is going to be our cumulative dimension table for players_sessions
 select * from player_seasons;
 CREATE TYPE season_stats AS (
                             season INTEGER,
@@ -8,6 +9,7 @@ CREATE TYPE season_stats AS (
                          );
 CREATE TYPE scoring_class AS ENUM ('star', 'good', 'average', 'bad');
 
+-- season_stats is an array of struct, because this is what we are going to use as history
 CREATE TABLE players (
     player_name TEXT,
     height TEXT,
@@ -23,6 +25,7 @@ CREATE TABLE players (
     PRIMARY KEY (player_name, current_season)
 );
 
+-- Prepare the query using multi-layer queries with `WITH` statement and only then `INSERT INTO`
 INSERT INTO players
 WITH yesterday AS (
     SELECT * FROM players
@@ -80,6 +83,7 @@ SELECT
 FROM today t FULL OUTER JOIN yesterday y
                              ON t.player_name = y.player_name;
 
+-- Example on how to quickly extract the struct to multi-column fields
 WITH unnested AS (
     SELECT player_name,
            scoring_class,
@@ -96,6 +100,7 @@ SELECT player_name,
        (season_stats::season_stats).*
 FROM unnested;
 
+-- Example on how to use this `players` table for analytical purpose
 SELECT
     player_name,
     (season_stats[CARDINALITY(season_stats)]::season_stats).pts /
