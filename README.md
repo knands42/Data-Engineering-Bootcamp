@@ -1,12 +1,12 @@
 # 📅 Data Engineering - Modeling
 
-This repository will 
+This repository will
 
 **TL;DR**
 
-1. [Clone the repository](https://github.com/knands42/Data-Engineering-Bootcamp/README.md).
-2. [Start Postgres instance](https://github.com/knands42/Data-Engineering-Bootcamp/README.md#2%EF%B8%8F%E2%83%A3run-postgres).
-3. [Connect to Postgres](https://github.com/knands42/Data-Engineering-Bootcamp/README.md#threeconnect-to-postgres-in-database-client) using your preferred database management tool.
+1. [Clone the repository](#1️⃣clone-the-repository).
+2. [Start Postgres instance](#2️⃣run-postgres).
+3. [Connect to Postgres](#option-1-run-on-local-machine) using your preferred database management tool.
 
 For detailed instructions and more information, please refer to the step-by-step instructions below.
 
@@ -52,7 +52,7 @@ There are two methods to get Postgres running locally.
     ```
 
 - Start the Docker Compose container:
-    - If you're on Mac:
+  - If you're on Mac:
 
         ```bash
         make up
@@ -60,8 +60,8 @@ There are two methods to get Postgres running locally.
 
 - A folder named **`postgres-data`** will be created in the root of the repo. The data backing your Postgres instance will be saved here.
 - You can check that your Docker Compose stack is running by either:
-    - Going into Docker Desktop: you should see an entry there with a drop-down for each of the containers running in your Docker Compose stack.
-    - Running **`docker ps -a`** and looking for the containers with the name **`postgres`**.
+  - Going into Docker Desktop: you should see an entry there with a drop-down for each of the containers running in your Docker Compose stack.
+  - Running **`docker ps -a`** and looking for the containers with the name **`postgres`**.
 - When you're finished with your Postgres instance, you can stop the Docker Compose containers with:
 
     ```bash
@@ -74,4 +74,5 @@ There are two methods to get Postgres running locally.
 - To see logs from the Postgres container, run **`make logs`**.
 
 ## Credits
+
 This project was created to follow the lessons and solve exercises from [Data with Zach](https://www.youtube.com/@EcZachly_) bootcamp on YouTube.
