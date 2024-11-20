@@ -2,11 +2,11 @@
 INSERT INTO players
 WITH yesterday AS (
     SELECT * FROM players
-    WHERE current_season = 1995
+    WHERE current_season = 1996
 ),
      today AS (
          SELECT * FROM player_seasons
-         WHERE season = 1996
+         WHERE season = 1997
      )
 
 SELECT
@@ -45,13 +45,14 @@ SELECT
                 WHEN t.pts > 10 THEN 'average'
                 ELSE 'bad'
                 END::scoring_class
-        ELSE Y.scoring_class
+        ELSE y.scoring_class
         END as scoring_class,
     CASE WHEN t.season IS NOT NULL THEN 0
          ELSE y.years_since_last_season + 1
         END as years_since_last_season,
 
-    COALESCE(t.season, y.current_season + 1) as current_season
+    COALESCE(t.season, y.current_season + 1) as current_season,
+    (y.season_stats[CARDINALITY(y.season_stats)]::season_stats).season = current_season AS is_active
 
 FROM today t
     FULL OUTER JOIN yesterday y
